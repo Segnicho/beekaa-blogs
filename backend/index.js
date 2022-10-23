@@ -1,31 +1,23 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import mongoose from 'mongoose'
-import cors from 'cors'
+// import express from 'express';
+// import mongoose from 'mongoose';
+// import dotenv from 'dotenv';
+// import authRoute from "./routes/auth.js";
 
-import postRoutes from './routes/posts.js';
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const authRoute = require('./routes/auth');
 
 const app = express();
+app.use(express.json());
+dotenv.config()
+mongoose.connect(process.env.MONGO_URL,{
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+}).then(console.log("Connected to mogodb")).catch((err)=>console.log(err));
 
-app.use('/post', postRoutes)
+app.use('/api/auth',authRoute);
 
-app.use(bodyParser.json({limit:"30mb", extended:true}))
-app.use(bodyParser.urlencoded({limit:"30mb", extended:true}))
-app.use(cors())
-
-const CONNECTION_URL = 'mongodb+srv://segnicho:segni0347@cluster0.tp2bejt.mongodb.net/?retryWrites=true&w=majority'
-const PORT = process.env.PORT || 5000
-
-mongoose .connect(CONNECTION_URL, 
-    // { useNewUrlParser:true, useUnifiedTopology:true}
-    ).then(
-    () => app.listen(PORT, console.log(`server running on port: ${PORT}`)) 
-).catch(
-    (error)=>console.log(error.message)
-);
-
-mongoose.set('useFindAndModify', false)
-
-
-
-
+app.listen("3000",()=>{
+    console.log("Serrver running...");
+}) 
