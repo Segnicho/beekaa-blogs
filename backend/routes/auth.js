@@ -11,16 +11,28 @@ router.post("/register", async (req,res)=>{
             username: req.body.username,
             email: req.body.email,
             password:hashedPassword,
-
         })
-console.log();
         const user = await newUser.save();
         res.status(200).json(user);
-
+        
     } catch (err) {
         console.log(err)
         res.status(500).json(err);
     }
+});
+
+router.post('/login', async (req,res)=>{
+    try {
+        const user = await User.findOne({username:req.body.username});
+        !user && res.status(400).json("wrong credentials");
+        const validate = bcrypt.compare(req.body.password, user.password)
+        !validate&&res.status(400).json("wrong credentials");
+        const {password, ...others} = user._doc;
+        res.status(200).json(others)
+    } catch (err) {
+        console.log(err)
+    }
 })
+
 
 module.exports = router
