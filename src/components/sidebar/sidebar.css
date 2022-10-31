@@ -23,11 +23,12 @@
     font-weight: 600;
     line-height: 20px;
     text-align: center;
+    width: 80%;
 }
 
 .sidebarImg{
     margin-top: 15px;
-    width: 250px;
+    width: 100%;
     height: 250px;
 }
 .sidebarList{
@@ -37,18 +38,19 @@
 .sidebarListItem{
     display: inline-block;
     width: 50%;
-    margin-top: 20px;
+    margin-top: 15px;
     cursor: pointer;
 }
 
 .sidebarSocial{
     display: flex;
+    margin-top: 15px;
     width: 250px;
     align-items: center;
     justify-content: center;
 }
 .sidebarIcon{
-    font-size: 18px;
+    font-size: 16px;
     margin-left: 10px;
     cursor: pointer;
 }

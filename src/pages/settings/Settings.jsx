@@ -3,22 +3,21 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
+import { LoginFailure, LoginSuccess, UpdateFailure, UpdateStart, UpdateSuccess } from "../../context/Actions";
 
 export default function Settings() {
   const api = 'http://127.0.0.1:4000/api';
-
   const [file, setFile] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
-
   const { user, dispatch } = useContext(Context);
   const PF = "http://localhost:4000/images/"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({ type: "UPDATE_START" });
+    dispatch(UpdateStart());
     const updatedUser = {
       userId: user._id,
       username,
@@ -39,14 +38,12 @@ export default function Settings() {
     }
     try {
       const res =  await axios.put(`${api}/users/${user._id}`,updatedUser);        
-      console.log('====================================');
-      console.log(res.data);
-      console.log('====================================');
+
       // const res = await axios.put("/users/" + user._id, updatedUser);
       setSuccess(true);
-      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      dispatch(UpdateSuccess(res.data));
     } catch (err) {
-      dispatch({ type: "UPDATE_FAILURE" });
+      dispatch(UpdateFailure());
     }
   };
   return (

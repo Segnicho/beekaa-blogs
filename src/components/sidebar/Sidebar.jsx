@@ -18,7 +18,7 @@ useEffect(()=>{
     <div className='sidebar'>
         <div className="sidebarItem">
             <span className="sidebarTitle">About Us</span>
-            <img className='sidebarImg' src="https://img.freepik.com/free-photo/two-beautiful-women-shopping-town_1303-16426.jpg?w=2000" alt="" />
+            <img className='sidebarImg' src="https://images.pexels.com/photos/13621329/pexels-photo-13621329.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="" />
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur assumenda rem soluta in, cumque </p>
         </div>
         <div className="sidebarItem">
